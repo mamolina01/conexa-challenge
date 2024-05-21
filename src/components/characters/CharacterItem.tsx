@@ -1,14 +1,14 @@
 import Image from 'next/image'
 import styles from './CharacterItem.module.scss'
+import { Character } from '@/interfaces'
 
 interface Props {
-    character: any
+    character: Character
 }
 
 export const CharacterItem = ({ character }: Props) => {
 
     const getStatusClass = () => {
-        console.log(character.status)
         switch (character.status.toLowerCase()) {
             case 'alive':
                 return styles.alive
@@ -17,8 +17,15 @@ export const CharacterItem = ({ character }: Props) => {
         }
     }
 
+    const getName = () => {
+        if (character.name.length < 17) {
+            return character.name
+        }
+        return `${character.name.substring(0, 17).trim()}...`
+    }
+
     return (
-        <div className={styles.card}>
+        <div className={`${styles.card}`}>
             <div className={styles.imageContainer}>
                 <Image
                     src={character.image}
@@ -26,11 +33,12 @@ export const CharacterItem = ({ character }: Props) => {
                     className={styles.image}
                     fill
                 />
-                <span className={`${styles.status} ${getStatusClass()}`}>
-                    {character.status}
-                </span>
             </div>
-            <p className={styles.name}>{character.name}</p>
+            <div className={styles.textContainer}>
+                <p className={styles.name}>{getName()}</p>
+                <p className={`${styles.status} ${getStatusClass()}`}>{character.status}</p>
+                <p className={styles.species}>{character.species}</p>
+            </div>
         </div >
     )
 }

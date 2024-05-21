@@ -3,6 +3,7 @@ import { CharacterItem } from './CharacterItem'
 import { Character } from '@/interfaces'
 import { useState } from 'react'
 import { CharacterSelector } from './characterSelector/CharacterSelector'
+import styles from './CharacterItem.module.scss'
 
 interface Props {
     characters: Character[]
@@ -34,11 +35,13 @@ export const CharacterList = ({ characters }: Props) => {
     }
 
     const getSelectedCharacter = (character: Character) => {
-        if (character.id === characterOne?.id || character.id === characterTwo?.id) {
-            return true
+        if (character.id === characterOne?.id) {
+            return styles.activeCharacterOne
+        } else if (character.id === characterTwo?.id) {
+            return styles.activeCharacterTwo
         }
 
-        return false
+        return ''
     }
 
     return (
@@ -47,7 +50,7 @@ export const CharacterList = ({ characters }: Props) => {
             <div className='mt-6 flex flex-col gap-5'>
                 <div className='grid grid-cols-4 gap-4 items-center'>
                     {characters.map((character: Character) => (
-                        <CharacterItem character={character} key={character.id} selectCharacter={selectCharacter} isSelectedCharacter={getSelectedCharacter(character)} />
+                        <CharacterItem character={character} key={character.id} selectCharacter={selectCharacter} selectedClassName={getSelectedCharacter(character)} />
                     ))}
                 </div>
 

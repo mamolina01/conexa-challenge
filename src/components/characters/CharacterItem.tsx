@@ -5,10 +5,10 @@ import { Character } from '@/interfaces'
 interface Props {
     character: Character
     selectCharacter: (character: Character) => void
-    isSelectedCharacter: boolean
+    selectedClassName: string
 }
 
-export const CharacterItem = ({ character, selectCharacter, isSelectedCharacter }: Props) => {
+export const CharacterItem = ({ character, selectCharacter, selectedClassName }: Props) => {
 
     const getStatusClass = () => {
         switch (character.status.toLowerCase()) {
@@ -27,7 +27,7 @@ export const CharacterItem = ({ character, selectCharacter, isSelectedCharacter 
     }
 
     return (
-        <div className={`${styles.card} ${isSelectedCharacter ? styles.active : ''}`} onClick={() => selectCharacter(character)}>
+        <div className={`${styles.card} ${selectedClassName}`} onClick={() => selectCharacter(character)}>
             <div className={styles.imageContainer}>
                 <Image
                     src={character.image}

@@ -1,8 +1,12 @@
 .card {
 	@apply flex gap-2 p-1 border-4 box-border border-transparent bg-neutral-100 rounded-xl;
 
-	&.active {
+	&.activeCharacterOne {
 		@apply border-green-800;
+	}
+
+	&.activeCharacterTwo {
+		@apply border-amber-900;
 	}
 
 	.imageContainer {
@@ -39,15 +43,3 @@
 
 	}
 }
-
-// .status {
-// 	@apply absolute top-1 left-1 bg-zinc-400 capitalize py-1 px-2 rounded;
-
-// 	&.alive {
-// 		@apply bg-green-500
-// 	}
-
-// 	&.dead {
-// 		@apply bg-red-600;
-// 	}
-// }

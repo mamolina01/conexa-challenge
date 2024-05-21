@@ -1,22 +1,53 @@
+"use client"
 import { CharacterItem } from './CharacterItem'
 import { Character } from '@/interfaces'
+import { useState } from 'react'
+import { CharacterSelector } from './characterSelector/CharacterSelector'
 
 interface Props {
     characters: Character[]
 }
 
-export const CharacterList = async ({ characters }: Props) => {
+export const CharacterList = ({ characters }: Props) => {
+    const [selectorActive, setSelectorActive] = useState<number>(0)
+
+    const [characterOne, setCharacterOne] = useState<Character | null>(null)
+    const [characterTwo, setCharacterTwo] = useState<Character | null>(null)
+
+    const handleSelector = (selector: number) => {
+        if (selector === selectorActive) {
+            setSelectorActive(0)
+        } else {
+            setSelectorActive(selector)
+        }
+    }
+
+    const selectCharacter = (character: Character) => {
+
+        if (selectorActive === 1) {
+            setCharacterOne(character)
+            setSelectorActive(0)
+        } else if (selectorActive === 2) {
+            setCharacterTwo(character)
+            setSelectorActive(0)
+        }
+    }
+
+    const getSelectedCharacter = (character: Character) => {
+        if (character.id === characterOne?.id || character.id === characterTwo?.id) {
+            return true
+        }
+
+        return false
+    }
 
     return (
         <>
-            <div className='flex w-full justify-between'>
-                <p className='text-neutral-900 font-bold text-2xl'>Character #1</p>
-                <p className='text-neutral-900 font-bold text-2xl'>Character #2</p>
-            </div>
+            <CharacterSelector handleSelector={handleSelector} selectorActive={selectorActive} />
             <div className='mt-6 flex flex-col gap-5'>
                 <div className='grid grid-cols-4 gap-4 items-center'>
                     {characters.map((character: Character) => (
-                        <CharacterItem character={character} key={character.id} />
+                        <CharacterItem character={character} key={character.id} selectCharacter={selectCharacter} isSelectedCharacter={getSelectedCharacter(character)} />
                     ))}
                 </div>
 

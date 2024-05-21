@@ -3,9 +3,9 @@
 import { GetCharactersResponse } from "@/interfaces";
 
 
-export const getCharacters = async (): Promise<GetCharactersResponse> => {
+export const getCharacters = async (page: number = 1): Promise<GetCharactersResponse> => {
     try {
-        const data = await fetch("https://rickandmortyapi.com/api/character")
+        const data = await fetch(`https://rickandmortyapi.com/api/character/?page=${page}`)
             .then((data) => data.json())
             .then((response) => response);
 

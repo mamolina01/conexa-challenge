@@ -1,6 +1,6 @@
 export interface ApiResponse {
     info: Info;
-    results: Result[];
+    results: Character[];
 }
 
 export interface Info {
@@ -10,7 +10,7 @@ export interface Info {
     prev: string;
 }
 
-export interface Result {
+export interface Character {
     id: number;
     name: string;
     status: string;

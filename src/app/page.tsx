@@ -1,14 +1,27 @@
-import { CharacterList } from "./components/characters";
+import { getCharacters } from "@/actions/get-characters";
+import { CharacterList } from "../components/characters";
+import { Pagination } from "@/components/common";
 
-export default async function Home() {
+interface Props {
+  searchParams: {
+    page?: string
+  }
+}
+
+export default async function Home({ searchParams }: Props) {
+  const page = searchParams.page ? parseInt(searchParams.page) : 1
+  const { ok, data } = await getCharacters(page)
+
+  if (!ok && !data) {
+    return <p>Hubo un error</p>
+  }
 
   return (
     <main>
-      <h4 className="text-3xl uppercase">CHARACTERS</h4>
-      <div className="grid grid-cols-2 gap-5 ">
-        <CharacterList subtitle="Character 1" />
-        <CharacterList subtitle="Character 2" />
-      </div>
+      <CharacterList characters={data?.results ?? []} />
+
+      <Pagination totalPages={data?.info.pages!} />
+
     </main>
   );
 }

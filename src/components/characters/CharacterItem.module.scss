@@ -1,0 +1,45 @@
+.card {
+	@apply flex gap-2 p-1 border-4 box-border border-transparent bg-neutral-100 rounded-xl;
+
+	&.activeCharacterOne {
+		@apply border-green-800;
+	}
+
+	&.activeCharacterTwo {
+		@apply border-amber-900;
+	}
+
+	.imageContainer {
+		@apply relative min-w-[100px] h-[100px];
+
+		.image {
+			@apply object-cover rounded-xl border;
+		}
+
+	}
+
+	.textContainer {
+		@apply flex flex-col items-start gap-1;
+
+		.name {
+			@apply text-xl text-green-800 font-bold;
+		}
+
+		.status {
+			@apply bg-zinc-400 text-center px-2 rounded text-sm capitalize;
+
+			&.alive {
+				@apply bg-green-500
+			}
+
+			&.dead {
+				@apply bg-red-600;
+			}
+		}
+
+		.species {
+			@apply text-green-800 font-semibold;
+		}
+
+	}
+}

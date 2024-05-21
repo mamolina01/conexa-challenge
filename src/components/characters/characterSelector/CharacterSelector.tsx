@@ -1,28 +1,43 @@
 import { LuPointer } from 'react-icons/lu'
 import styles from './CharacterSelector.module.scss'
+import { Character } from '@/interfaces'
+import { IoCloseSharp } from 'react-icons/io5'
 
 interface Props {
     handleSelector: (selector: number) => void
+    removeSelectedCharacter: (selector: number) => void
     selectorActive: number
+    character: {
+        number: number
+        data: Character | null
+    }
 }
 
-export const CharacterSelector = ({ handleSelector, selectorActive }: Props) => {
+export const CharacterSelector = ({ handleSelector, removeSelectedCharacter, selectorActive, character }: Props) => {
+    const getClassName = () => {
+        if (character.number === 1) {
+            return styles.characterOne
+        } else if (character.number === 2) {
+            return styles.characterTwo
+        }
+    }
     return (
-        <div className={styles.container}>
-            <div className={styles.characterContainer}>
-                <p className={`${styles.text} ${styles.characterOne}`}>Character #1</p>
-                <button onClick={() => handleSelector(1)} className={`${styles.button} ${styles.characterOne} ${selectorActive === 1 ? styles.active : ''}`}>
+        <div className={`${styles.characterContainer} ${getClassName()}`}>
+            <p className={`${styles.text} ${getClassName()}`}>Character #{character.number}</p>
+            {character.data ? (
+                <button className={`${styles.button} ${getClassName()}`} onClick={() => removeSelectedCharacter(character.number)}>
+                    <span>{character.data.name}</span>
+                    <IoCloseSharp className='text-xl' />
+                </button>
+            ) : (
+                <button
+                    onClick={() => handleSelector(character.number)}
+                    className={`${styles.button} ${getClassName()} ${selectorActive === character.number ? styles.active : ''}`}>
                     <LuPointer />
                     <span>Choose one...</span>
                 </button>
-            </div>
-            <div className={styles.characterContainer}>
-                <button onClick={() => handleSelector(2)} className={`${styles.button} ${styles.characterTwo} ${selectorActive === 2 ? styles.active : ''}`}>
-                    <LuPointer />
-                    <span>Choose one...</span>
-                </button>
-                <p className={`${styles.text} ${styles.characterTwo}`}>Character #2</p>
-            </div>
+            )
+            }
         </div>
     )
 }

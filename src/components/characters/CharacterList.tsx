@@ -44,9 +44,29 @@ export const CharacterList = ({ characters }: Props) => {
         return ''
     }
 
+    const removeSelectedCharacter = (value: number) => {
+        if (value === 1) {
+            setCharacterOne(null)
+            setSelectorActive(0)
+        } else if (value === 2) {
+            setCharacterTwo(null)
+            setSelectorActive(0)
+        }
+    }
+
     return (
         <>
-            <CharacterSelector handleSelector={handleSelector} selectorActive={selectorActive} />
+            <div className='flex justify-between w-full'>
+                <CharacterSelector handleSelector={handleSelector} removeSelectedCharacter={removeSelectedCharacter} selectorActive={selectorActive} character={{
+                    number: 1,
+                    data: characterOne
+                }} />
+
+                <CharacterSelector handleSelector={handleSelector} removeSelectedCharacter={removeSelectedCharacter} selectorActive={selectorActive} character={{
+                    number: 2,
+                    data: characterTwo
+                }} />
+            </div>
             <div className='mt-6 flex flex-col gap-5'>
                 <div className='grid grid-cols-4 gap-4 items-center'>
                     {characters.map((character: Character) => (

@@ -25,20 +25,22 @@ export const CharacterList = ({ characters }: Props) => {
 
     const selectCharacter = (character: Character) => {
 
-        if (selectorActive === 1) {
-            setCharacterOne(character)
-            setSelectorActive(0)
-        } else if (selectorActive === 2) {
-            setCharacterTwo(character)
-            setSelectorActive(0)
+        if (character !== characterOne && character !== characterTwo) {
+            if (selectorActive === 1) {
+                setCharacterOne(character)
+                setSelectorActive(0)
+            } else if (selectorActive === 2) {
+                setCharacterTwo(character)
+                setSelectorActive(0)
+            }
         }
     }
 
     const getSelectedCharacter = (character: Character) => {
         if (character.id === characterOne?.id) {
-            return styles.activeCharacterOne
+            return styles.characterOneSelected
         } else if (character.id === characterTwo?.id) {
-            return styles.activeCharacterTwo
+            return styles.characterTwoSelected
         }
 
         return ''
@@ -70,7 +72,7 @@ export const CharacterList = ({ characters }: Props) => {
             <div className='mt-6 flex flex-col gap-5'>
                 <div className='grid grid-cols-4 gap-4 items-center'>
                     {characters.map((character: Character) => (
-                        <CharacterItem character={character} key={character.id} selectCharacter={selectCharacter} selectedClassName={getSelectedCharacter(character)} />
+                        <CharacterItem character={character} key={character.id} selectCharacter={selectCharacter} isSelectorActive={selectorActive !== 0} selectedClassName={getSelectedCharacter(character)} />
                     ))}
                 </div>
 

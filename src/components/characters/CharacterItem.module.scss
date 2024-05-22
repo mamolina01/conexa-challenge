@@ -22,7 +22,7 @@
 	}
 
 	.imageContainer {
-		@apply relative min-w-[100px] h-[100px];
+		@apply relative min-w-[100px] md:h-[100px];
 
 		.image {
 			@apply object-cover rounded-xl border;

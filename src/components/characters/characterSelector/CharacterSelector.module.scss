@@ -1,8 +1,8 @@
-.characterContainer {
-    @apply flex gap-4 items-center;
+.selectorContainer {
+    @apply flex gap-4 w-full items-center;
 
     &.characterTwo{
-        @apply flex-row-reverse
+        @apply sm:flex-row-reverse
     }
 
     .text {
@@ -40,9 +40,9 @@
 
 
 .characterOne {
-    @apply text-green-800;
+    @apply text-green-900;
 }
 
 .characterTwo {
-    @apply text-amber-800;
+    @apply text-amber-900;
 }

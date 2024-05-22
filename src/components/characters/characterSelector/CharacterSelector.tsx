@@ -2,6 +2,7 @@ import { LuPointer } from 'react-icons/lu'
 import styles from './CharacterSelector.module.scss'
 import { Character } from '@/interfaces'
 import { IoCloseSharp } from 'react-icons/io5'
+import { getShortText } from '@/utils'
 
 interface Props {
     handleSelector: (selector: number) => void
@@ -22,11 +23,11 @@ export const CharacterSelector = ({ handleSelector, removeSelectedCharacter, sel
         }
     }
     return (
-        <div className={`${styles.characterContainer} ${getClassName()}`}>
+        <div className={`${styles.selectorContainer} ${getClassName()}`}>
             <p className={`${styles.text} ${getClassName()}`}>Character #{character.number}</p>
             {character.data ? (
                 <button className={`${styles.button} ${getClassName()}`} onClick={() => removeSelectedCharacter(character.number)}>
-                    <span>{character.data.name}</span>
+                    <span>{getShortText(character.data.name, 17)}</span>
                     <IoCloseSharp className='text-xl' />
                 </button>
             ) : (

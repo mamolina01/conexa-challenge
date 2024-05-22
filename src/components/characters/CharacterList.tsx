@@ -65,7 +65,7 @@ export const CharacterList = ({
 
     return (
         <>
-            <div className='flex justify-between w-full'>
+            <div className='flex flex-col sm:flex-row justify-between gap-3 w-full'>
                 <CharacterSelector handleSelector={handleSelector} removeSelectedCharacter={removeSelectedCharacter} selectorActive={selectorActive} character={{
                     number: 1,
                     data: characterOne
@@ -77,7 +77,7 @@ export const CharacterList = ({
                 }} />
             </div>
             <div className='mt-6 flex flex-col gap-5'>
-                <div className='grid grid-cols-4 gap-4 items-center'>
+                <div className='grid grid-cols-1 max-h-[520px] overflow-scroll md:max-h-full md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 items-center rounded-xl'>
                     {characters.map((character: Character) => (
                         <CharacterItem character={character} key={character.id} selectCharacter={selectCharacter} isSelectorActive={selectorActive !== 0} selectedClassName={getSelectedCharacter(character)} />
                     ))}

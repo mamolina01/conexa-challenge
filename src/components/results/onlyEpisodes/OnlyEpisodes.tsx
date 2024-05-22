@@ -1,12 +1,14 @@
-import { Character, Episode } from '@/interfaces'
+import { Character, Episode as EpisodeProps } from '@/interfaces'
 import React, { useEffect, useState } from 'react'
+import { Episode } from '../episode/Episode'
+import { EpisodeList } from '../episode/EpisodeList'
 
 interface Props {
   character: Character | null
 }
 
 export const OnlyEpisodes = ({ character }: Props) => {
-  const [episodes, setEpisodes] = useState<Episode[] | []>([])
+  const [episodes, setEpisodes] = useState<EpisodeProps[] | []>([])
 
   const getCharacters = async () => {
     try {
@@ -29,21 +31,18 @@ export const OnlyEpisodes = ({ character }: Props) => {
 
   return (
     <div className='flex flex-col gap-5 p-5 items-center'>
-      <h5 className='text-2xl font-bold text-green-900'>
-        {character ? character.name : 'Select character'}
-      </h5>
-
-      <div className='flex flex-col gap-2 max-h-[300px] overflow-scroll'>
-        {
-          episodes.length === 0 ? (
-            <p>No hay episodios</p>
-          ) : (
-            episodes.map((episode) => (
-              <p>{episode.name}</p>
-            ))
-          )
-        }
-      </div>
+      {!character ? (
+        <h5 className='text-xl font-bold text-green-900'>
+          Select a character
+        </h5>
+      ) : (
+        <>
+          <h5 className='text-xl font-bold text-green-900'>
+            {character.name}'s Episodes  {'('}{episodes.length}{')'}
+          </h5>
+          <EpisodeList episodes={episodes} />
+        </>
+      )}
     </div>
   )
 }

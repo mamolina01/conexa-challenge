@@ -44,7 +44,7 @@ export const OnlyEpisodes = ({ character }: Props) => {
           <h5 className='text-xl font-bold text-green-900'>
             {character.name}'s Episodes  {'('}{episodes.length}{')'}
           </h5>
-          <EpisodeList episodes={episodes} />
+          <EpisodeList episodes={episodes} emptyMessage="The character doesn't have episodes" />
         </>
       )}
     </div>

@@ -6,9 +6,10 @@ interface Props {
     character: Character
     selectCharacter: (character: Character) => void
     selectedClassName: string
+    isSelectorActive: boolean
 }
 
-export const CharacterItem = ({ character, selectCharacter, selectedClassName }: Props) => {
+export const CharacterItem = ({ character, selectCharacter, selectedClassName, isSelectorActive }: Props) => {
 
     const getStatusClass = () => {
         switch (character.status.toLowerCase()) {
@@ -27,7 +28,7 @@ export const CharacterItem = ({ character, selectCharacter, selectedClassName }:
     }
 
     return (
-        <div className={`${styles.card} ${selectedClassName}`} onClick={() => selectCharacter(character)}>
+        <div className={`${styles.card} ${selectedClassName} ${isSelectorActive ? styles.selectorActive : ''}`} onClick={() => selectCharacter(character)}>
             <div className={styles.imageContainer}>
                 <Image
                     src={character.image}

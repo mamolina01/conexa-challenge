@@ -1,11 +1,23 @@
 .card {
 	@apply flex gap-2 p-1 border-4 box-border border-transparent bg-neutral-100 rounded-xl;
 
-	&.activeCharacterOne {
+	&.selectorActive {
+		@apply cursor-pointer;
+
+		&.characterOneSelected {
+			@apply cursor-not-allowed;
+		}
+
+		&.characterTwoSelected {
+			@apply cursor-not-allowed;
+		}
+	}
+
+	&.characterOneSelected {
 		@apply border-green-800;
 	}
 
-	&.activeCharacterTwo {
+	&.characterTwoSelected {
 		@apply border-amber-900;
 	}
 

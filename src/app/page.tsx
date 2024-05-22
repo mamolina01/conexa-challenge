@@ -13,8 +13,8 @@ interface Props {
 
 export default function Home({ searchParams }: Props) {
   const page = searchParams.page ? parseInt(searchParams.page) : 1
-  const [characters, setCharacters] = useState([])
-  const [totalPages, setTotalPages] = useState(0)
+  const [characters, setCharacters] = useState<Character[] | []>([])
+  const [totalPages, setTotalPages] = useState<number>(0)
   const [characterOne, setCharacterOne] = useState<Character | null>(null)
   const [characterTwo, setCharacterTwo] = useState<Character | null>(null)
 

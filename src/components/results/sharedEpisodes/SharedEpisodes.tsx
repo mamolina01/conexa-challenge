@@ -13,11 +13,12 @@ export const SharedEpisodes = ({ characterOne, characterTwo }: Props) => {
 
   const getCharacters = async () => {
     try {
-      if (!characterOne && !characterTwo) {
+      if (!characterOne || !characterTwo) {
         setEpisodes([])
         return
       }
-      const { episodes } = await fetch(`http://localhost:3000/api/episodes/?id=${characterOne?.id}`).then((data) => data.json())
+      const { episodes } = await fetch(`http://localhost:3000/api/shared-episodes/?characterOneId=${characterOne.id}&characterTwoId=${characterTwo.id}`)
+        .then((data) => data.json())
         .then((response) => response);
 
       setEpisodes(episodes)
@@ -32,7 +33,7 @@ export const SharedEpisodes = ({ characterOne, characterTwo }: Props) => {
 
   return (
     <div className='flex flex-col gap-5 p-5 items-center bg-green-50 rounded-xl'>
-      {!characterOne && !characterTwo ? (
+      {!characterOne || !characterTwo ? (
         <h5 className='text-xl font-bold text-green-900'>
           Select both characters
         </h5>

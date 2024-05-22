@@ -41,7 +41,7 @@ export default function Home({ searchParams }: Props) {
       <Pagination totalPages={totalPages} />
       <div className="grid grid-cols-3 mt-20">
         <OnlyEpisodes character={characterOne} />
-        <SharedEpisodes />
+        <SharedEpisodes characterOne={characterOne} characterTwo={characterTwo} />
         <OnlyEpisodes character={characterTwo} />
       </div>
     </main>

@@ -31,7 +31,7 @@ export const OnlyEpisodes = ({ character }: Props) => {
   }, [character])
 
   return (
-    <div className='flex flex-col gap-5 p-5 items-center'>
+    <div className='flex flex-col gap-5 p-2 sm:p-5 items-center'>
       {!character ? (
         <>
           <h5 className='text-xl font-bold text-green-900'>

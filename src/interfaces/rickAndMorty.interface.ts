@@ -25,6 +25,12 @@ export interface Character {
     created: Date;
 }
 
+export interface Episode {
+    id: number;
+    name: string;
+    date: string;
+}
+
 export interface Location {
     name: string;
     url: string;

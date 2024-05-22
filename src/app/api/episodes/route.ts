@@ -1,18 +1,17 @@
+import { fetchEpisodes } from "@/utils";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (request: NextRequest): Promise<NextResponse> => {
     try {
         const { searchParams } = new URL(request.url);
-        const page = searchParams.get('page') ?? '1'
+        const characterId = searchParams.get('characterId') ?? ''
 
-        const data = await fetch(`https://rickandmortyapi.com/api/character/?page=${page}`)
-            .then((data) => data.json())
-            .then((response) => response);
+        const episodes = await fetchEpisodes(characterId)
 
-
-        return NextResponse.json({ data })
+        return NextResponse.json({ episodes })
     } catch (error) {
         console.log(error)
+        // TODO: Check this response
         return NextResponse.json({ error: 'algo salio mal' })
     }
 }

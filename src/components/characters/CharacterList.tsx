@@ -22,8 +22,6 @@ export const CharacterList = ({
 }: Props) => {
     const [selectorActive, setSelectorActive] = useState<number>(0)
 
-
-
     const handleSelector = (selector: number) => {
         if (selector === selectorActive) {
             setSelectorActive(0)

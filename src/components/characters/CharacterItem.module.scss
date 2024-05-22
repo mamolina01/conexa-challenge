@@ -3,15 +3,15 @@
 
 	&.selectorActive {
 		@apply cursor-pointer;
-	
+
 		&.characterOneSelected {
-		  @apply cursor-not-allowed;
+			@apply cursor-not-allowed;
 		}
-	
+
 		&.characterTwoSelected {
-		  @apply cursor-not-allowed;
+			@apply cursor-not-allowed;
 		}
-	  }
+	}
 
 	&.characterOneSelected {
 		@apply border-green-800;

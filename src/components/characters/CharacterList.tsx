@@ -7,13 +7,22 @@ import styles from './CharacterItem.module.scss'
 
 interface Props {
     characters: Character[]
+    characterOne: Character | null
+    characterTwo: Character | null
+    setCharacterOne: (character: Character | null) => void
+    setCharacterTwo: (character: Character | null) => void
 }
 
-export const CharacterList = ({ characters }: Props) => {
+export const CharacterList = ({
+    characters,
+    characterOne,
+    characterTwo,
+    setCharacterOne,
+    setCharacterTwo
+}: Props) => {
     const [selectorActive, setSelectorActive] = useState<number>(0)
 
-    const [characterOne, setCharacterOne] = useState<Character | null>(null)
-    const [characterTwo, setCharacterTwo] = useState<Character | null>(null)
+
 
     const handleSelector = (selector: number) => {
         if (selector === selectorActive) {

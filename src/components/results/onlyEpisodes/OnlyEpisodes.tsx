@@ -1,6 +1,5 @@
 import { Character, Episode as EpisodeProps } from '@/interfaces'
 import React, { useEffect, useState } from 'react'
-import { Episode } from '../episode/Episode'
 import { EpisodeList } from '../episode/EpisodeList'
 
 interface Props {
@@ -16,7 +15,7 @@ export const OnlyEpisodes = ({ character }: Props) => {
         setEpisodes([])
         return
       }
-      const { episodes } = await fetch(`http://localhost:3000/api/episodes/?id=${character?.id}`).then((data) => data.json())
+      const { episodes } = await fetch(`http://localhost:3000/api/episodes/?characterId=${character?.id}`).then((data) => data.json())
         .then((response) => response);
 
       setEpisodes(episodes)

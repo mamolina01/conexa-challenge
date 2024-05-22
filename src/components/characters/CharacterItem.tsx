@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import styles from './CharacterItem.module.scss'
 import { Character } from '@/interfaces'
+import { getShortText } from '@/utils'
 
 interface Props {
     character: Character
@@ -20,13 +21,6 @@ export const CharacterItem = ({ character, selectCharacter, selectedClassName, i
         }
     }
 
-    const getName = () => {
-        if (character.name.length < 17) {
-            return character.name
-        }
-        return `${character.name.substring(0, 17).trim()}...`
-    }
-
     return (
         <div className={`${styles.card} ${selectedClassName} ${isSelectorActive ? styles.selectorActive : ''}`} onClick={() => selectCharacter(character)}>
             <div className={styles.imageContainer}>
@@ -38,7 +32,7 @@ export const CharacterItem = ({ character, selectCharacter, selectedClassName, i
                 />
             </div>
             <div className={styles.textContainer}>
-                <p className={styles.name}>{getName()}</p>
+                <p className={styles.name}>{getShortText(character.name, 17)}</p>
                 <p className={`${styles.status} ${getStatusClass()}`}>{character.status}</p>
                 <p className={styles.species}>{character.species}</p>
             </div>

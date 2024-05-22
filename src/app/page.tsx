@@ -1,7 +1,7 @@
 "use client"
 import { CharacterList } from "../components/characters";
 import { Pagination } from "@/components/common";
-import { OnlyEpisodes, SharedEpisodes } from "@/components/results";
+import { OnlyEpisodes, SharedEpisodes } from "@/components/episodes";
 import { Character } from "@/interfaces";
 import { useEffect, useState } from "react";
 
@@ -36,10 +36,9 @@ export default function Home({ searchParams }: Props) {
 
   return (
     <main>
-      {/* TODO: Check this props */}
       <CharacterList characters={characters} characterOne={characterOne} setCharacterOne={setCharacterOne} characterTwo={characterTwo} setCharacterTwo={setCharacterTwo} />
       <Pagination totalPages={totalPages} />
-      <div className="grid grid-cols-3 mt-10 min-h-[300px]">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-5 md:mt-10 min-h-[300px]">
         <OnlyEpisodes character={characterOne} />
         <SharedEpisodes characterOne={characterOne} characterTwo={characterTwo} />
         <OnlyEpisodes character={characterTwo} />

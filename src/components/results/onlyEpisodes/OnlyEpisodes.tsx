@@ -1,6 +1,7 @@
 import { Character, Episode as EpisodeProps } from '@/interfaces'
 import React, { useEffect, useState } from 'react'
 import { EpisodeList } from '../episode/EpisodeList'
+import { FcSearch } from 'react-icons/fc'
 
 interface Props {
   character: Character | null
@@ -20,6 +21,7 @@ export const OnlyEpisodes = ({ character }: Props) => {
 
       setEpisodes(episodes)
     } catch (error) {
+      setEpisodes([])
       throw new Error('Hubo un error')
     }
   }
@@ -31,9 +33,12 @@ export const OnlyEpisodes = ({ character }: Props) => {
   return (
     <div className='flex flex-col gap-5 p-5 items-center'>
       {!character ? (
-        <h5 className='text-xl font-bold text-green-900'>
-          Select a character
-        </h5>
+        <>
+          <h5 className='text-xl font-bold text-green-900'>
+            Select a character
+          </h5>
+          <FcSearch className='text-9xl my-auto' />
+        </>
       ) : (
         <>
           <h5 className='text-xl font-bold text-green-900'>

@@ -39,7 +39,7 @@ export default function Home({ searchParams }: Props) {
       {/* TODO: Check this props */}
       <CharacterList characters={characters} characterOne={characterOne} setCharacterOne={setCharacterOne} characterTwo={characterTwo} setCharacterTwo={setCharacterTwo} />
       <Pagination totalPages={totalPages} />
-      <div className="grid grid-cols-3 mt-20">
+      <div className="grid grid-cols-3 mt-10 min-h-[300px]">
         <OnlyEpisodes character={characterOne} />
         <SharedEpisodes characterOne={characterOne} characterTwo={characterTwo} />
         <OnlyEpisodes character={characterTwo} />

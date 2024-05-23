@@ -2,6 +2,7 @@ import { Character, Episode as EpisodeProps } from '@/interfaces'
 import React, { useEffect, useState } from 'react'
 import { EpisodeList } from '../episode/EpisodeList'
 import { FcSearch } from 'react-icons/fc'
+import { Spinner } from '@/components/common'
 
 interface Props {
   character: Character | null
@@ -9,6 +10,7 @@ interface Props {
 
 export const OnlyEpisodes = ({ character }: Props) => {
   const [episodes, setEpisodes] = useState<EpisodeProps[] | []>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
     const getCharacters = async () => {
@@ -17,6 +19,7 @@ export const OnlyEpisodes = ({ character }: Props) => {
           setEpisodes([])
           return
         }
+        setIsLoading(true)
         const { episodes } = await fetch(`/api/episodes/?characterId=${character?.id}`).then((data) => data.json())
           .then((response) => response);
 
@@ -25,6 +28,7 @@ export const OnlyEpisodes = ({ character }: Props) => {
         setEpisodes([])
         throw new Error('Hubo un error')
       }
+      setIsLoading(false)
     }
     getCharacters()
   }, [character])
@@ -43,7 +47,10 @@ export const OnlyEpisodes = ({ character }: Props) => {
           <h5 className='text-xl font-bold text-green-900'>
             {character.name}{"'"}s Episodes  {'('}{episodes.length}{')'}
           </h5>
-          <EpisodeList episodes={episodes} emptyMessage="The character doesn't have episodes" />
+          {isLoading ?
+            <Spinner /> :
+            <EpisodeList episodes={episodes} emptyMessage="The character doesn't have episodes" />
+          }
         </>
       )}
     </div>

@@ -20,7 +20,7 @@ export const SharedEpisodes = ({ characterOne, characterTwo }: Props) => {
           setEpisodes([])
           return
         }
-        const { episodes } = await fetch(`http://localhost:3000/api/shared-episodes/?characterOneId=${characterOne.id}&characterTwoId=${characterTwo.id}`)
+        const { episodes } = await fetch(`/api/shared-episodes/?characterOneId=${characterOne.id}&characterTwoId=${characterTwo.id}`)
           .then((data) => data.json())
           .then((response) => response);
 

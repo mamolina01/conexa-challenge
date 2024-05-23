@@ -25,7 +25,7 @@ export default function Home({ searchParams }: Props) {
     const getCharacters = async () => {
       try {
         setIsLoading(true)
-        const { data } = await fetch(`http://localhost:3000/api/characters/?page=${page}`).then((data) => data.json())
+        const { data } = await fetch(`/api/characters/?page=${page}`).then((data) => data.json())
           .then((response) => response);
 
         setCharacters(data.results)

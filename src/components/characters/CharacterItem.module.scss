@@ -1,5 +1,5 @@
 .card {
-	@apply flex gap-2 p-1 border-4 box-border border-transparent bg-neutral-100 rounded-xl;
+	@apply flex gap-2 p-1 border-4 box-border border-transparent bg-neutral-100 rounded-xl transition-all;
 
 	&.selectorActive {
 		@apply cursor-pointer border-blue-400;

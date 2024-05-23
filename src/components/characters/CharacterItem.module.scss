@@ -2,7 +2,7 @@
 	@apply flex gap-2 p-1 border-4 box-border border-transparent bg-neutral-100 rounded-xl;
 
 	&.selectorActive {
-		@apply cursor-pointer;
+		@apply cursor-pointer border-blue-400;
 
 		&.characterOneSelected {
 			@apply cursor-not-allowed;
@@ -22,7 +22,7 @@
 	}
 
 	.imageContainer {
-		@apply relative min-w-[100px] h-[100px];
+		@apply relative min-w-[100px] md:h-[100px];
 
 		.image {
 			@apply object-cover rounded-xl border;

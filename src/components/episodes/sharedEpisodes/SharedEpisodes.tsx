@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { EpisodeList } from '../episode/EpisodeList'
 import Image from 'next/image'
 import rickAndMorty from "/public/rickandmorty.png"
+import { Spinner } from '@/components/common'
 
 interface Props {
   characterOne: Character | null
@@ -12,6 +13,7 @@ interface Props {
 
 export const SharedEpisodes = ({ characterOne, characterTwo }: Props) => {
   const [episodes, setEpisodes] = useState<EpisodeProps[] | []>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
     const getCharacters = async () => {
@@ -20,6 +22,7 @@ export const SharedEpisodes = ({ characterOne, characterTwo }: Props) => {
           setEpisodes([])
           return
         }
+        setIsLoading(true)
         const { episodes } = await fetch(`/api/shared-episodes/?characterOneId=${characterOne.id}&characterTwoId=${characterTwo.id}`)
           .then((data) => data.json())
           .then((response) => response);
@@ -29,6 +32,7 @@ export const SharedEpisodes = ({ characterOne, characterTwo }: Props) => {
         setEpisodes([])
         throw new Error('Hubo un error')
       }
+      setIsLoading(false)
     }
     getCharacters()
   }, [characterOne, characterTwo])
@@ -47,7 +51,10 @@ export const SharedEpisodes = ({ characterOne, characterTwo }: Props) => {
           <h5 className='text-xl font-bold text-green-900'>
             Shared Episodes  {'('}{episodes.length}{')'}
           </h5>
-          <EpisodeList episodes={episodes} emptyMessage={"They don't have episodes together"} />
+          {isLoading ?
+            <Spinner /> :
+            <EpisodeList episodes={episodes} emptyMessage={"They don't have episodes together"} />
+          }
         </>
       )
       }

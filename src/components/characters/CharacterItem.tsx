@@ -1,0 +1,41 @@
+import Image from 'next/image'
+import styles from './CharacterItem.module.scss'
+import { Character } from '@/interfaces'
+import { getShortText } from '@/utils'
+
+interface Props {
+    character: Character
+    selectCharacter: (character: Character) => void
+    selectedClassName: string
+    isSelectorActive: boolean
+}
+
+export const CharacterItem = ({ character, selectCharacter, selectedClassName, isSelectorActive }: Props) => {
+
+    const getStatusClass = () => {
+        switch (character.status.toLowerCase()) {
+            case 'alive':
+                return styles.alive
+            case 'dead':
+                return styles.dead
+        }
+    }
+
+    return (
+        <div className={`${styles.card} ${selectedClassName} ${isSelectorActive ? styles.selectorActive : ''}`} onClick={() => selectCharacter(character)}>
+            <div className={styles.imageContainer}>
+                <Image
+                    src={character.image}
+                    alt={character.name}
+                    className={styles.image}
+                    fill
+                />
+            </div>
+            <div className={styles.textContainer}>
+                <p className={styles.name}>{getShortText(character.name, 17)}</p>
+                <p className={`${styles.status} ${getStatusClass()}`}>{character.status}</p>
+                <p className={styles.species}>{character.species}</p>
+            </div>
+        </div >
+    )
+}

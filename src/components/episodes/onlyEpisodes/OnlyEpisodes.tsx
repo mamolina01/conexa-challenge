@@ -10,23 +10,22 @@ interface Props {
 export const OnlyEpisodes = ({ character }: Props) => {
   const [episodes, setEpisodes] = useState<EpisodeProps[] | []>([])
 
-  const getCharacters = async () => {
-    try {
-      if (!character) {
-        setEpisodes([])
-        return
-      }
-      const { episodes } = await fetch(`http://localhost:3000/api/episodes/?characterId=${character?.id}`).then((data) => data.json())
-        .then((response) => response);
-
-      setEpisodes(episodes)
-    } catch (error) {
-      setEpisodes([])
-      throw new Error('Hubo un error')
-    }
-  }
-
   useEffect(() => {
+    const getCharacters = async () => {
+      try {
+        if (!character) {
+          setEpisodes([])
+          return
+        }
+        const { episodes } = await fetch(`http://localhost:3000/api/episodes/?characterId=${character?.id}`).then((data) => data.json())
+          .then((response) => response);
+
+        setEpisodes(episodes)
+      } catch (error) {
+        setEpisodes([])
+        throw new Error('Hubo un error')
+      }
+    }
     getCharacters()
   }, [character])
 
@@ -42,7 +41,7 @@ export const OnlyEpisodes = ({ character }: Props) => {
       ) : (
         <>
           <h5 className='text-xl font-bold text-green-900'>
-            {character.name}'s Episodes  {'('}{episodes.length}{')'}
+            {character.name}{"'"}s Episodes  {'('}{episodes.length}{')'}
           </h5>
           <EpisodeList episodes={episodes} emptyMessage="The character doesn't have episodes" />
         </>

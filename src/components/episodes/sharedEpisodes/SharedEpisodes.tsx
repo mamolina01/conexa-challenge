@@ -13,24 +13,23 @@ interface Props {
 export const SharedEpisodes = ({ characterOne, characterTwo }: Props) => {
   const [episodes, setEpisodes] = useState<EpisodeProps[] | []>([])
 
-  const getCharacters = async () => {
-    try {
-      if (!characterOne || !characterTwo) {
-        setEpisodes([])
-        return
-      }
-      const { episodes } = await fetch(`http://localhost:3000/api/shared-episodes/?characterOneId=${characterOne.id}&characterTwoId=${characterTwo.id}`)
-        .then((data) => data.json())
-        .then((response) => response);
-
-      setEpisodes(episodes)
-    } catch (error) {
-      setEpisodes([])
-      throw new Error('Hubo un error')
-    }
-  }
-
   useEffect(() => {
+    const getCharacters = async () => {
+      try {
+        if (!characterOne || !characterTwo) {
+          setEpisodes([])
+          return
+        }
+        const { episodes } = await fetch(`http://localhost:3000/api/shared-episodes/?characterOneId=${characterOne.id}&characterTwoId=${characterTwo.id}`)
+          .then((data) => data.json())
+          .then((response) => response);
+
+        setEpisodes(episodes)
+      } catch (error) {
+        setEpisodes([])
+        throw new Error('Hubo un error')
+      }
+    }
     getCharacters()
   }, [characterOne, characterTwo])
 

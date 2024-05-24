@@ -1,16 +1,29 @@
+"use client"
 import { Character, Episode as EpisodeProps } from '@/interfaces'
 import React, { useEffect, useState } from 'react'
 import { EpisodeList } from '../episode/EpisodeList'
 import { FcSearch } from 'react-icons/fc'
 import { Spinner } from '@/components/common'
+import { useCharactersStore } from '@/store'
 
 interface Props {
-  character: Character | null
+  characterNumber: number
 }
 
-export const OnlyEpisodes = ({ character }: Props) => {
+export const OnlyEpisodes = ({ characterNumber }: Props) => {
+  const [character, setCharacter] = useState<Character | null>(null)
   const [episodes, setEpisodes] = useState<EpisodeProps[] | []>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const { characterOne, characterTwo } = useCharactersStore(state => state)
+
+  useEffect(() => {
+    if (characterNumber === 1) {
+      setCharacter(characterOne)
+    } else if (characterNumber === 2) {
+      setCharacter(characterTwo)
+    }
+  }, [characterOne, characterTwo, characterNumber])
 
   useEffect(() => {
     const getCharacters = async () => {
@@ -26,7 +39,6 @@ export const OnlyEpisodes = ({ character }: Props) => {
         setEpisodes(episodes)
       } catch (error) {
         setEpisodes([])
-        throw new Error('Hubo un error')
       }
       setIsLoading(false)
     }

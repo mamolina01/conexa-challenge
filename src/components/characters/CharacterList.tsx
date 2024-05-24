@@ -1,85 +1,23 @@
-"use client"
 import { CharacterItem } from './CharacterItem'
 import { Character } from '@/interfaces'
-import { useState } from 'react'
 import { CharacterSelector } from './characterSelector/CharacterSelector'
-import styles from './CharacterItem.module.scss'
-
 interface Props {
     characters: Character[]
-    characterOne: Character | null
-    characterTwo: Character | null
-    setCharacterOne: (character: Character | null) => void
-    setCharacterTwo: (character: Character | null) => void
 }
 
 export const CharacterList = ({
-    characters,
-    characterOne,
-    characterTwo,
-    setCharacterOne,
-    setCharacterTwo
+    characters
 }: Props) => {
-    const [selectorActive, setSelectorActive] = useState<number>(0)
-
-    const handleSelector = (selector: number) => {
-        if (selector === selectorActive) {
-            setSelectorActive(0)
-        } else {
-            setSelectorActive(selector)
-        }
-    }
-
-    const selectCharacter = (character: Character) => {
-
-        if (character !== characterOne && character !== characterTwo) {
-            if (selectorActive === 1) {
-                setCharacterOne(character)
-                setSelectorActive(0)
-            } else if (selectorActive === 2) {
-                setCharacterTwo(character)
-                setSelectorActive(0)
-            }
-        }
-    }
-
-    const getSelectedCharacter = (character: Character) => {
-        if (character.id === characterOne?.id) {
-            return styles.characterOneSelected
-        } else if (character.id === characterTwo?.id) {
-            return styles.characterTwoSelected
-        }
-
-        return ''
-    }
-
-    const removeSelectedCharacter = (value: number) => {
-        if (value === 1) {
-            setCharacterOne(null)
-            setSelectorActive(0)
-        } else if (value === 2) {
-            setCharacterTwo(null)
-            setSelectorActive(0)
-        }
-    }
-
     return (
         <>
             <div className='flex flex-col sm:flex-row justify-between gap-3 w-full'>
-                <CharacterSelector handleSelector={handleSelector} removeSelectedCharacter={removeSelectedCharacter} selectorActive={selectorActive} character={{
-                    number: 1,
-                    data: characterOne
-                }} />
-
-                <CharacterSelector handleSelector={handleSelector} removeSelectedCharacter={removeSelectedCharacter} selectorActive={selectorActive} character={{
-                    number: 2,
-                    data: characterTwo
-                }} />
+                <CharacterSelector characterNumber={1} />
+                <CharacterSelector characterNumber={2} />
             </div>
             <div className='mt-6 flex flex-col gap-5'>
                 <div className='grid grid-cols-1 max-h-[520px] overflow-scroll md:max-h-full md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 items-center rounded-xl'>
                     {characters.map((character: Character) => (
-                        <CharacterItem character={character} key={character.id} selectCharacter={selectCharacter} isSelectorActive={selectorActive !== 0} selectedClassName={getSelectedCharacter(character)} />
+                        <CharacterItem character={character} key={character.id} />
                     ))}
                 </div>
 

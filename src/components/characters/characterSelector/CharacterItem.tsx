@@ -15,7 +15,6 @@ export const CharacterItem = ({ character }: Props) => {
     const { selectorActive, characterOne, characterTwo } = useCharactersStore(state => state)
     const { selectCharacter } = useCharacterSelector()
 
-
     const getStatusClass = () => {
         switch (character.status.toLowerCase()) {
             case 'alive':
@@ -50,8 +49,8 @@ export const CharacterItem = ({ character }: Props) => {
             <div className={styles.textContainer}>
                 <p className={styles.name}>{getShortText(character.name, 17)}</p>
                 <p className={`${styles.status} ${getStatusClass()}`}>{character.status}</p>
-                <p className={styles.species}>{character.species}</p>
+                <p className={styles.species}>{getShortText(character.species, 15)}</p>
             </div>
-        </div >
+        </div>
     )
 }

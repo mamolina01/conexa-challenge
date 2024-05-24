@@ -12,12 +12,10 @@ interface Props {
     characterNumber: number
 }
 
-
 export const CharacterSelector = ({ characterNumber }: Props) => {
     const [character, setCharacter] = useState<Character | null>(null)
     const { handleSelector, removeSelectedCharacter } = useCharacterSelector()
     const { characterOne, characterTwo, selectorActive } = useCharactersStore(state => state)
-
 
     useEffect(() => {
         if (characterNumber === 1) {
@@ -26,7 +24,6 @@ export const CharacterSelector = ({ characterNumber }: Props) => {
             setCharacter(characterTwo)
         }
     }, [characterOne, characterTwo, characterNumber])
-
 
     const getClassName = () => {
         if (characterNumber === 1) {
@@ -41,7 +38,7 @@ export const CharacterSelector = ({ characterNumber }: Props) => {
             <p className={`${styles.text} ${getClassName()}`}>Character #{characterNumber}</p>
             {character ? (
                 <button className={`${styles.button} ${getClassName()}`} onClick={() => removeSelectedCharacter(characterNumber)}>
-                    <span>{getShortText(character.name, 17)}</span>
+                    <span>{getShortText(character.name, 12)}</span>
                     <IoCloseSharp className='text-xl' />
                 </button>
             ) : (

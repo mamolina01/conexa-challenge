@@ -1,16 +1,20 @@
+"use client"
 import Image from 'next/image'
 import styles from './CharacterItem.module.scss'
 import { Character } from '@/interfaces'
 import { getShortText } from '@/utils'
+import { useCharactersStore } from '@/store'
+import { useCharacterSelector } from '@/hooks'
 
 interface Props {
     character: Character
-    selectCharacter: (character: Character) => void
-    selectedClassName: string
-    isSelectorActive: boolean
 }
 
-export const CharacterItem = ({ character, selectCharacter, selectedClassName, isSelectorActive }: Props) => {
+export const CharacterItem = ({ character }: Props) => {
+
+    const { selectorActive, characterOne, characterTwo } = useCharactersStore(state => state)
+    const { selectCharacter } = useCharacterSelector()
+
 
     const getStatusClass = () => {
         switch (character.status.toLowerCase()) {
@@ -21,8 +25,20 @@ export const CharacterItem = ({ character, selectCharacter, selectedClassName, i
         }
     }
 
+    const getSelectedClassName = () => {
+        if (character.id === characterOne?.id) {
+            return styles.characterOneSelected
+        } else if (character.id === characterTwo?.id) {
+            return styles.characterTwoSelected
+        }
+
+        return ''
+    }
+
+    const isSelectorActive = selectorActive !== 0
+
     return (
-        <div className={`${styles.card} ${selectedClassName} ${isSelectorActive ? styles.selectorActive : ''}`} onClick={() => selectCharacter(character)}>
+        <div className={`${styles.card} ${getSelectedClassName()} ${isSelectorActive ? styles.selectorActive : ''}`} onClick={() => selectCharacter(character)}>
             <div className={styles.imageContainer}>
                 <Image
                     src={character.image}

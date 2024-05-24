@@ -3,7 +3,6 @@ import { Episode } from "./Episode"
 import Image from "next/image"
 import rick from "/public/rick.png"
 
-
 interface Props {
     episodes: EpisodeProps[]
     emptyMessage: string

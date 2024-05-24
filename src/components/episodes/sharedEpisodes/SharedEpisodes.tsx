@@ -1,19 +1,17 @@
-import { Character, Episode as EpisodeProps } from '@/interfaces'
+"use client"
+import { Episode as EpisodeProps } from '@/interfaces'
 import React, { useEffect, useState } from 'react'
 import { EpisodeList } from '../episode/EpisodeList'
 import Image from 'next/image'
 import rickAndMorty from "/public/rickandmorty.png"
 import { Spinner } from '@/components/common'
+import { useCharactersStore } from '@/store'
 
-interface Props {
-  characterOne: Character | null
-  characterTwo: Character | null
-}
-
-
-export const SharedEpisodes = ({ characterOne, characterTwo }: Props) => {
+export const SharedEpisodes = () => {
   const [episodes, setEpisodes] = useState<EpisodeProps[] | []>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const { characterOne, characterTwo } = useCharactersStore(state => state)
 
   useEffect(() => {
     const getCharacters = async () => {
@@ -30,7 +28,6 @@ export const SharedEpisodes = ({ characterOne, characterTwo }: Props) => {
         setEpisodes(episodes)
       } catch (error) {
         setEpisodes([])
-        throw new Error('Hubo un error')
       }
       setIsLoading(false)
     }

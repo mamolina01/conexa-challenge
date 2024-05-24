@@ -1,39 +1,50 @@
+"use client"
 import { LuPointer } from 'react-icons/lu'
 import styles from './CharacterSelector.module.scss'
 import { Character } from '@/interfaces'
 import { IoCloseSharp } from 'react-icons/io5'
 import { getShortText } from '@/utils'
+import { useCharacterSelector } from '@/hooks'
+import { useCharactersStore } from '@/store'
+import { useEffect, useState } from 'react'
 
 interface Props {
-    handleSelector: (selector: number) => void
-    removeSelectedCharacter: (selector: number) => void
-    selectorActive: number
-    character: {
-        number: number
-        data: Character | null
-    }
+    characterNumber: number
 }
 
-export const CharacterSelector = ({ handleSelector, removeSelectedCharacter, selectorActive, character }: Props) => {
+export const CharacterSelector = ({ characterNumber }: Props) => {
+    const [character, setCharacter] = useState<Character | null>(null)
+    const { handleSelector, removeSelectedCharacter } = useCharacterSelector()
+    const { characterOne, characterTwo, selectorActive } = useCharactersStore(state => state)
+
+    useEffect(() => {
+        if (characterNumber === 1) {
+            setCharacter(characterOne)
+        } else if (characterNumber === 2) {
+            setCharacter(characterTwo)
+        }
+    }, [characterOne, characterTwo, characterNumber])
+
     const getClassName = () => {
-        if (character.number === 1) {
+        if (characterNumber === 1) {
             return styles.characterOne
-        } else if (character.number === 2) {
+        } else if (characterNumber === 2) {
             return styles.characterTwo
         }
     }
+
     return (
         <div className={`${styles.selectorContainer} ${getClassName()}`}>
-            <p className={`${styles.text} ${getClassName()}`}>Character #{character.number}</p>
-            {character.data ? (
-                <button className={`${styles.button} ${getClassName()}`} onClick={() => removeSelectedCharacter(character.number)}>
-                    <span>{getShortText(character.data.name, 17)}</span>
+            <p className={`${styles.text} ${getClassName()}`}>Character #{characterNumber}</p>
+            {character ? (
+                <button className={`${styles.button} ${getClassName()}`} onClick={() => removeSelectedCharacter(characterNumber)}>
+                    <span>{getShortText(character.name, 12)}</span>
                     <IoCloseSharp className='text-xl' />
                 </button>
             ) : (
                 <button
-                    onClick={() => handleSelector(character.number)}
-                    className={`${styles.button} ${getClassName()} ${selectorActive === character.number ? styles.active : ''}`}>
+                    onClick={() => handleSelector(characterNumber)}
+                    className={`${styles.button} ${getClassName()} ${selectorActive === characterNumber ? styles.active : ''}`}>
                     <LuPointer />
                     <span>Choose one...</span>
                 </button>

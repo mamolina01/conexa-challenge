@@ -48,10 +48,8 @@ export const CharacterItem = ({ character }: Props) => {
             </div>
             <div className={styles.textContainer}>
                 <p className={styles.name}>{getShortText(character.name, 17)}</p>
-                <div className={styles.information}>
-                    <p className={styles.species}>{getShortText(character.species, 15)}</p>
-                    <p className={`${styles.status} ${getStatusClass()}`}>{character.status}</p>
-                </div>
+                <p className={`${styles.status} ${getStatusClass()}`}>{character.status}</p>
+                <p className={styles.species}>{getShortText(character.species, 15)}</p>
             </div>
         </div>
     )

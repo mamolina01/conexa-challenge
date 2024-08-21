@@ -22,7 +22,7 @@
 	}
 
 	.imageContainer {
-		@apply relative min-w-[100px] md:h-[100px];
+		@apply relative min-w-[80px] md:h-[80px];
 
 		.image {
 			@apply object-cover rounded-xl border;
@@ -37,21 +37,25 @@
 			@apply text-xl text-green-800 font-bold;
 		}
 
-		.status {
-			@apply bg-zinc-400 text-center px-2 rounded text-sm capitalize;
-
-			&.alive {
-				@apply bg-green-500
+		.information{
+			@apply flex gap-2 items-center;
+			
+			.status {
+				@apply bg-zinc-400 text-center px-2 rounded text-sm capitalize;
+				
+				&.alive {
+					@apply bg-green-500
+				}
+				
+				&.dead {
+					@apply bg-red-600;
+				}
 			}
-
-			&.dead {
-				@apply bg-red-600;
+			
+			.species {
+				@apply text-green-800 font-semibold;
 			}
 		}
-
-		.species {
-			@apply text-green-800 font-semibold;
-		}
-
+			
 	}
 }

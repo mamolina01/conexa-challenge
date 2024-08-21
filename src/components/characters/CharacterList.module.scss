@@ -2,6 +2,18 @@
     @apply flex flex-col sm:flex-row justify-between gap-3 w-full;
 }
 
-.characterList {
-    @apply grid grid-cols-1 mt-6 max-h-[520px] overflow-scroll md:max-h-full md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 items-center rounded-xl pr-2 pl-1 sm:px-0;
+.charactersContainer {
+    @apply bg-amber-50 px-2 py-4 mt-6 rounded-xl;
+
+    .characterList {
+        @apply grid grid-cols-1 max-h-[520px] overflow-scroll md:overflow-auto md:max-h-full md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 items-center rounded-xl pr-1 pl-2 sm:px-0;
+
+        &::-webkit-scrollbar {
+            @apply h-full w-[6px];
+        }
+
+        &::-webkit-scrollbar-thumb {
+            @apply bg-neutral-500 rounded-xl;
+        }
+    }
 }

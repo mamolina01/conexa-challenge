@@ -15,10 +15,12 @@ export const CharacterList = ({
                 <CharacterSelector characterNumber={1} />
                 <CharacterSelector characterNumber={2} />
             </div>
-            <div className={styles.characterList}>
-                {characters.map((character: Character) => (
-                    <CharacterItem character={character} key={character.id} />
-                ))}
+            <div className={styles.charactersContainer}>
+                <div className={styles.characterList}>
+                    {characters.map((character: Character) => (
+                        <CharacterItem character={character} key={character.id} />
+                    ))}
+                </div>
             </div>
         </>
     )

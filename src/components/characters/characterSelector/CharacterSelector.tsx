@@ -23,6 +23,11 @@ export const CharacterSelector = ({ characterNumber }: Props) => {
         } else if (characterNumber === 2) {
             setCharacter(characterTwo)
         }
+        if (characterOne && characterTwo) {
+            document.getElementById('episodes')?.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
     }, [characterOne, characterTwo, characterNumber])
 
     const getClassName = () => {

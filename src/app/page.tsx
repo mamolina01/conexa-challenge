@@ -19,7 +19,7 @@ export default async function Home({ searchParams }: Props) {
       <CharacterList characters={data?.results ?? []} />
       <Pagination totalPages={data?.info.pages!} />
 
-      <div className={styles.episodesContainer}>
+      <div className={styles.episodesContainer} id="episodes">
         <OnlyEpisodes characterNumber={1} />
         <SharedEpisodes />
         <OnlyEpisodes characterNumber={2} />

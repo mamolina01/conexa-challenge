@@ -1,8 +1,8 @@
-import React from 'react'
+import styles from './Header.module.scss'
 
 export const Header = () => {
     return (
-        <h1 className='text-3xl font-medium text-black py-3 text-center'>
+        <h1 className={styles.title}>
             Conexa Challenge
         </h1>
     )

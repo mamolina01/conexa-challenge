@@ -1,0 +1,11 @@
+.footerContainer {
+    @apply py-5 flex justify-center items-center sm:text-lg gap-2;
+
+    .name {
+        @apply text-green-800 hover:text-green-950 font-medium;
+    }
+
+    span {
+        @apply text-black;
+    }
+}

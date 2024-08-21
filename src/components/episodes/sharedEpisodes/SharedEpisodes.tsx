@@ -1,11 +1,12 @@
 "use client"
 import { Episode as EpisodeProps } from '@/interfaces'
 import React, { useEffect, useState } from 'react'
-import { EpisodeList } from '../episode/EpisodeList'
+import { EpisodeList } from '../episodeList/EpisodeList'
 import Image from 'next/image'
 import rickAndMorty from "/public/rickandmorty.png"
 import { Spinner } from '@/components/common'
 import { useCharactersStore } from '@/store'
+import styles from './SharedEpisodes.module.scss'
 
 export const SharedEpisodes = () => {
   const [episodes, setEpisodes] = useState<EpisodeProps[] | []>([])
@@ -35,17 +36,17 @@ export const SharedEpisodes = () => {
   }, [characterOne, characterTwo])
 
   return (
-    <div className='flex flex-col gap-5 p-5 items-center bg-green-50 rounded-xl'>
+    <div className={styles.container}>
       {!characterOne || !characterTwo ? (
         <>
-          <h5 className='text-xl font-bold text-green-900'>
+          <h5 className={styles.title}>
             Select both characters
           </h5>
           <Image src={rickAndMorty} alt="rickandmorty" />
         </>
       ) : (
         <>
-          <h5 className='text-xl font-bold text-green-900'>
+          <h5 className={styles.title}>
             Shared Episodes  {'('}{episodes.length}{')'}
           </h5>
           {isLoading ?

@@ -2,6 +2,7 @@ import { CharacterList } from "../components/characters";
 import { Pagination } from "@/components/common";
 import { OnlyEpisodes, SharedEpisodes } from "@/components/episodes";
 import { getCharacters } from "@/actions";
+import styles from './page.module.scss'
 
 interface Props {
   searchParams: {
@@ -14,11 +15,11 @@ export default async function Home({ searchParams }: Props) {
   const { data } = await getCharacters(page)
 
   return (
-    <main>
+    <main className={styles.contentContainer}>
       <CharacterList characters={data?.results ?? []} />
       <Pagination totalPages={data?.info.pages!} />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-5 md:mt-10 min-h-[300px]">
+      <div className={styles.episodesContainer}>
         <OnlyEpisodes characterNumber={1} />
         <SharedEpisodes />
         <OnlyEpisodes characterNumber={2} />

@@ -39,7 +39,7 @@ export const CharacterSelector = ({ characterNumber }: Props) => {
             {character ? (
                 <button className={`${styles.button} ${getClassName()}`} onClick={() => removeSelectedCharacter(characterNumber)}>
                     <span>{getShortText(character.name, 12)}</span>
-                    <IoCloseSharp className='text-xl' />
+                    <IoCloseSharp className={styles.removeIcon} />
                 </button>
             ) : (
                 <button

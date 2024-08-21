@@ -1,13 +1,13 @@
 import Link from 'next/link'
-import React from 'react'
+import styles from './Footer.module.scss'
 
 export const Footer = () => {
     return (
-        <div className=" py-5 flex justify-center items-center sm:text-lg gap-2">
-            <Link href="https://matiasnmolina.com" target='_blank' className='text-green-800 hover:text-green-950 font-medium' >
+        <div className={styles.footerContainer}>
+            <Link href="https://matiasnmolina.com" target='_blank' className={styles.name} >
                 Matias Molina
             </Link>
-            <span className='text-black'>
+            <span>
                 | Frontend Developer
             </span>
         </div>

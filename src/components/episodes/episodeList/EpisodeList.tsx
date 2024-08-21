@@ -1,7 +1,8 @@
 import { Episode as EpisodeProps } from "@/interfaces"
-import { Episode } from "./Episode"
+import { Episode } from "../episode/Episode"
 import Image from "next/image"
 import rick from "/public/rick.png"
+import styles from './EpisodeList.module.scss'
 
 interface Props {
     episodes: EpisodeProps[]
@@ -10,11 +11,11 @@ interface Props {
 
 export const EpisodeList = ({ episodes, emptyMessage }: Props) => {
     return (
-        <ul className='flex flex-col items-center gap-2 px-2 sm:px-4 max-h-[300px] w-full overflow-scroll'>
+        <div className={styles.container}>
             {
                 episodes.length === 0 ? (
                     <>
-                        <p className="text-neutral-700 font-medium mb-5">{emptyMessage}</p>
+                        <p className={styles.text}>{emptyMessage}</p>
                         <Image src={rick} alt="rick" width={250} height={250} />
                     </>
                 ) : (
@@ -23,6 +24,6 @@ export const EpisodeList = ({ episodes, emptyMessage }: Props) => {
                     ))
                 )
             }
-        </ul>
+        </div>
     )
 }

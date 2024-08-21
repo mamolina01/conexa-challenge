@@ -1,5 +1,5 @@
 .container {
-    @apply flex flex-col gap-5 p-2 sm:p-5 items-center;
+    @apply flex flex-col gap-5 p-2 sm:p-5 items-center bg-amber-50 rounded-xl;
 
     .title {
         @apply text-xl font-bold text-green-900;

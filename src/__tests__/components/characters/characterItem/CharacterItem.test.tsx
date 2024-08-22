@@ -2,8 +2,8 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { useCharactersStore } from '@/store'
 import { useCharacterSelector } from '@/hooks'
 import { CharacterItem } from '@/components/characters/characterItem/CharacterItem'
-import { Character } from '@/interfaces'
 import styles from '@/components/characters/characterItem/CharacterItem.module.scss'
+import { mockCharacter } from '@/__mocks__/character'
 
 // Mocking Zustand store
 jest.mock('../../../../store', () => ({
@@ -16,30 +16,6 @@ jest.mock('../../../../hooks', () => ({
 }))
 
 describe('CharacterItem Component', () => {
-    const mockCharacter: Character = {
-        "id": 2,
-        "name": "Morty Smith",
-        "status": "Alive",
-        "species": "Human",
-        "type": "",
-        "gender": "Male",
-        "origin": {
-            "name": "Earth",
-            "url": "https://rickandmortyapi.com/api/location/1"
-        },
-        "location": {
-            "name": "Earth",
-            "url": "https://rickandmortyapi.com/api/location/20"
-        },
-        "image": "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
-        "episode": [
-            "https://rickandmortyapi.com/api/episode/1",
-            "https://rickandmortyapi.com/api/episode/2",
-            // ...
-        ],
-        "url": "https://rickandmortyapi.com/api/character/2",
-        "created": new Date("2017-11-04T18:50:21.651Z")
-    }
 
     const mockSelectCharacter = jest.fn()
 
@@ -62,9 +38,9 @@ describe('CharacterItem Component', () => {
         const { getByText } = render(<CharacterItem character={mockCharacter} />)
 
 
-        expect(getByText('Morty Smith')).toBeInTheDocument()
-        expect(getByText('Alive')).toBeInTheDocument()
-        expect(getByText('Human')).toBeInTheDocument()
+        expect(getByText(mockCharacter.name)).toBeInTheDocument()
+        expect(getByText(mockCharacter.status)).toBeInTheDocument()
+        expect(getByText(mockCharacter.species)).toBeInTheDocument()
     })
 
     it('calls selectCharacter when the card is clicked', () => {
@@ -79,7 +55,7 @@ describe('CharacterItem Component', () => {
     it('applies the correct class for the character status', () => {
         const { getByText } = render(<CharacterItem character={mockCharacter} />)
 
-        const statusElement = getByText('Alive')
+        const statusElement = getByText(mockCharacter.status)
         expect(statusElement).toHaveClass(styles.alive)
     })
 

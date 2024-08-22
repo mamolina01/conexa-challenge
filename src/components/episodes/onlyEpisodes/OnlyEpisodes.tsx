@@ -1,10 +1,11 @@
 "use client"
 import { Character, Episode as EpisodeProps } from '@/interfaces'
 import React, { useEffect, useState } from 'react'
-import { EpisodeList } from '../episode/EpisodeList'
+import { EpisodeList } from '../episodeList/EpisodeList'
 import { FcSearch } from 'react-icons/fc'
 import { Spinner } from '@/components/common'
 import { useCharactersStore } from '@/store'
+import styles from './OnlyEpisodes.module.scss'
 
 interface Props {
   characterNumber: number
@@ -46,17 +47,17 @@ export const OnlyEpisodes = ({ characterNumber }: Props) => {
   }, [character])
 
   return (
-    <div className='flex flex-col gap-5 p-2 sm:p-5 items-center'>
+    <div className={styles.container}>
       {!character ? (
         <>
-          <h5 className='text-xl font-bold text-green-900'>
+          <h5 className={styles.title}>
             Select a character
           </h5>
-          <FcSearch className='text-9xl my-auto' />
+          <FcSearch className={styles.searchIcon} />
         </>
       ) : (
         <>
-          <h5 className='text-xl font-bold text-green-900'>
+          <h5 className={styles.title}>
             {character.name}{"'"}s Episodes  {'('}{episodes.length}{')'}
           </h5>
           {isLoading ?

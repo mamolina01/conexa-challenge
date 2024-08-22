@@ -1,0 +1,19 @@
+.container {
+    @apply border-2 border-orange-300 bg-white text-black flex flex-col w-full p-2 rounded-xl;
+
+    .episodeNumber {
+        @apply text-lg lg:text-xl font-semibold;
+    }
+
+    .propsContainer {
+        @apply flex items-center gap-2;
+
+        .icon {
+            @apply text-sm lg:text-lg;
+        }
+
+        .text {
+            @apply text-sm lg:text-lg;
+        }
+    }
+}

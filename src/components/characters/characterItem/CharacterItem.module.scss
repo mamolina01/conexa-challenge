@@ -1,5 +1,5 @@
 .card {
-	@apply flex gap-2 p-1 border-4 box-border border-transparent bg-neutral-100 rounded-xl transition-all;
+	@apply flex items-center gap-2 p-1 border-4 box-border border-neutral-300 bg-white rounded-xl transition-all;
 
 	&.selectorActive {
 		@apply cursor-pointer border-blue-400;
@@ -22,7 +22,7 @@
 	}
 
 	.imageContainer {
-		@apply relative min-w-[100px] md:h-[100px];
+		@apply relative min-w-[80px] h-[80px] md:h-[90px] md:min-w-[90px];
 
 		.image {
 			@apply object-cover rounded-xl border;
@@ -41,7 +41,7 @@
 			@apply bg-zinc-400 text-center px-2 rounded text-sm capitalize;
 
 			&.alive {
-				@apply bg-green-500
+				@apply bg-green-500;
 			}
 
 			&.dead {

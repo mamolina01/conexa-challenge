@@ -59,7 +59,7 @@ describe('CharacterItem Component', () => {
         expect(statusElement).toHaveClass(styles.alive)
     })
 
-    it('applies the selected class when the character is selected', () => {
+    it('applies the selected class when the character one is selected', () => {
         (useCharactersStore as unknown as jest.Mock).mockReturnValue({
             selectorActive: 1,
             characterOne: mockCharacter,
@@ -70,5 +70,18 @@ describe('CharacterItem Component', () => {
 
         const card = screen.getByRole('button')
         expect(card).toHaveClass(styles.characterOneSelected)
+    })
+
+    it('applies the selected class when the character two is selected', () => {
+        (useCharactersStore as unknown as jest.Mock).mockReturnValue({
+            selectorActive: 1,
+            characterOne: null,
+            characterTwo: mockCharacter,
+        })
+
+        render(<CharacterItem character={mockCharacter} />)
+
+        const card = screen.getByRole('button')
+        expect(card).toHaveClass(styles.characterTwoSelected)
     })
 })

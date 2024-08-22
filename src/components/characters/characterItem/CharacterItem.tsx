@@ -37,7 +37,7 @@ export const CharacterItem = ({ character }: Props) => {
     const isSelectorActive = selectorActive !== 0
 
     return (
-        <div className={`${styles.card} ${getSelectedClassName()} ${isSelectorActive ? styles.selectorActive : ''}`} onClick={() => selectCharacter(character)}>
+        <div role="button" className={`${styles.card} ${getSelectedClassName()} ${isSelectorActive ? styles.selectorActive : ''}`} onClick={() => selectCharacter(character)}>
             <div className={styles.imageContainer}>
                 <Image
                     src={character.image}

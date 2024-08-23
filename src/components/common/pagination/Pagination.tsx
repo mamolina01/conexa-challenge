@@ -44,16 +44,21 @@ export const Pagination = ({ totalPages }: Props) => {
     return (
         <div className={styles.container}>
             <Link href={createPageUrl(currentPage - 1)}
+                data-testid="backLink"
                 className={styles.arrow}>
                 <IoChevronBackOutline size={30} />
             </Link>
 
             {allPages.map((page, index) => (
-                <Link href={createPageUrl(page)} className={`${styles.page} ${page === currentPage ? styles.active : ''}`} key={`${page}-${index}`}>
+                <Link href={createPageUrl(page)}
+                    data-testid={page}
+                    className={`${styles.page} ${page === currentPage ? styles.active : ''}`} key={`${page}-${index}`}>
                     {page}
                 </Link>
             ))}
-            <Link href={createPageUrl(currentPage + 1)} className={styles.arrow}>
+            <Link href={createPageUrl(currentPage + 1)}
+                data-testid="forwardLink"
+                className={styles.arrow}>
                 <IoChevronForwardOutline size={30} />
             </Link>
         </div>

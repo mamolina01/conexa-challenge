@@ -11,8 +11,10 @@ Rick and Morty application that displays a list of characters, allowing you to s
 - TailwindCSS
 - Sass
 - Zustand
+- Jest
+- React Testing Library
 
-### Installation
+## Installation
 
 1. Clone the repository:
 
@@ -42,6 +44,32 @@ Rick and Morty application that displays a list of characters, allowing you to s
    ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Testing
+
+This project uses **Jest** and **React Testing Library** for testing components and functionality. Below are the available test scripts:
+
+- **Run all tests**: To run the complete test suite, use the following command:
+
+   ```bash
+   npm run test
+   # or   
+   yarn test
+   # or
+   pnpm test
+   # or
+   bun test
+
+- **Run tests in watch mode**: To run tests in watch mode, use:
+
+   ```bash
+   npm run test:watch
+   # or   
+   yarn test:watch
+   # or
+   pnpm test:watch
+   # or
+   bun test:watch
 
 ### Contributing
 
